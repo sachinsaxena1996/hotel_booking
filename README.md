@@ -5,15 +5,18 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby version ruby 2.3.1p112
 
-* System dependencies
+* System dependencies Rails 5.0.0.1
 
 * Configuration
 
 * Database creation
+* To create db :
+  rake db:create
 
 * Database initialization
+* rails db:migrate
 
 * How to run the test suite
 
