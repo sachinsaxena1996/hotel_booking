@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+<h3>Room Bookings</h3>
+<table border= "2" id="bk_table">
+	<thead>
+		<tr>			
+			<th>Booking#</th>
+			<th>Name</th>
+			<th>Email ID</th>
+			<th>Room#</th>
+			<th>Start date</th>
+			<th>End date</th>
+			<th>Show</th>
+			<th>Destroy</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @bookings.each do |booking| %>
+			<tr>
+				<td><%= booking.booking_number %></td>
+				<td><%= booking.customer_name %></td>
+				<td><%= booking.customer_email %></td>
+				<td><%= booking.room_number %></td>
+				<td><%= booking.start_date.strftime('%d-%m-%Y') %></td>
+				<td><%= booking.end_date.strftime('%d-%m-%Y') %></td>
+				<td><%= link_to 'Show', booking, class: "btn btn-info btn-lg" %></td>
+				<td><%= link_to 'Destroy', booking, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-info btn-lg" %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+<br>
+<%= link_to 'New Booking', new_booking_path, class: "btn btn-info btn-lg" if customer_signed_in? %>
+
+
+<script type="text/javascript">
+  $(document).ready( function () {
+	  $('#bk_table').DataTable({
+		  "paging": true,
+		  "scrollY": 400,
+		  "ordering": true
+		});
+  } );
+</script>

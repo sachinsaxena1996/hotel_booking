@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+<p>
+  <strong>Booking Number:</strong>
+  <%= @booking.booking_number %>
+</p>
+<p>
+  <strong>Room Number:</strong>
+  <%= @booking.room_number %>
+</p>
+<p>
+  <strong>Start date:</strong>
+  <%= @booking.start_date.strftime('%d-%m-%Y') %>
+</p>
+<p>
+  <strong>End date:</strong>
+  <%= @booking.end_date.strftime('%d-%m-%Y') %>
+</p>
+<%= link_to 'Back', bookings_path, class: "btn btn-info btn-lg"  %>

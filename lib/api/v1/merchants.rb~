@@ -1,0 +1,48 @@
+module API
+  module V1
+    class Merchants < Grape::API
+      prefix  'api'
+      version 'v1',using: :accept_version_header
+
+      resource :merchants do
+        desc "Return all transactions of a merchant"
+        get ':id/transactions' do
+        	merchant_rec = Transaction.where(merchant_id: params[:id])        
+          if merchant_rec.present?
+      		  merchant_rec.as_json
+          else
+             ["No transactions found for merchant with id #{params[:id]}"].as_json              						  
+          end
+        end
+        
+        desc "creates merchant record"
+        post  do
+          merchant_rec = Merchant.new(name: params[:name], domain: params[:domain])
+          if merchant_rec.save
+            ["Merchant record created successfully."].as_json
+          else
+            ["Merchant record not created."].as_json
+          end             						  			
+        end
+
+        desc "updates merchant record"
+        put ':id' do
+          merchant_rec = Merchant.where(id: params[:id]).first
+          if (merchant_rec.present?)
+	          merchant_rec.name = params[:name] if params[:name].present?
+            merchant_rec.domain = params[:domain] if params[:domain].present?
+            if merchant_rec.save
+              ["Merchant record with id: #{params[:id]} updated successfully."].as_json
+            else
+              ["Merchant record with id: #{params[:id]} not updated."].as_json
+            end
+          else
+            ["Invalid Merchant id #{params[:id]}"].as_json              						  
+          end				  			
+        end
+
+      end
+		end
+  end
+end
+

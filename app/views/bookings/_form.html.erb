@@ -1,0 +1,28 @@
+<%= form_for(booking) do |f| %>
+	<% if booking.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(booking.errors.count, "error") %> prohibited this booking from being saved:</h2>
+			<ul>
+				<% booking.errors.full_messages.each do |message| %>
+					<li><%= message %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+	<div class="form-group">
+		<%= f.label :room_type %>
+		<%= f.select(:room_type, options_for_room_type, class: "form-control") %>
+	</div>
+	<div class="form-group">
+		<%= f.label :start_date %>
+		<%= f.date_select(:start_date, min: Date.today, max: Date.today, order: [:day, :month , :year], class: "form-control") %>
+	</div>
+	<div class="form-group">
+		<%= f.label :end_date %>
+		<%= f.date_select(:end_date, order: [:day, :month , :year], class: "form-control") %>
+	</div>
+	<div class="form-group">
+			<%= f.submit(data: { disable_with: "Please Wait..." }, class: "btn btn-info btn-lg") %>
+		</div>
+<% end %>
+

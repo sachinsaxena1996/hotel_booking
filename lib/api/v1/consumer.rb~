@@ -1,0 +1,26 @@
+require 'json_builder'
+
+module API
+  module V1
+    class Consumer < Grape::API
+    #use Grape::Attack::Throttle    
+    prefix  'api'
+    version 'v1',using: :accept_version_header
+
+
+      helpers do
+        #def render_failure_response(data)        
+        #end
+      end
+
+        resource :consumers do          
+          desc "Return list of all consumers."
+          get do
+            	consumers_rec = Consumer.all
+              json_response(consumers_rec)
+          end
+          end
+
+  end
+end
+

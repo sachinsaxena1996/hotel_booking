@@ -1,0 +1,46 @@
+<h3>Hotel Rooms</h3>
+<table id="room_table" border="2">
+  <thead>
+    <tr>
+      <th>Number</th>
+      <th>Room Type</th>
+      <th>Specification</th>
+      <th>Charges</th>
+      <th>Status</th>
+      <th>Show</th>
+      <th>Edit</th>
+      <th>Destroy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @rooms.present? %>
+      <% @rooms.each do |room| %>
+        <tr>
+          <td><%= room.number %></td>
+          <td><%= room.room_type %></td>
+          <td><%= room.specification %></td>
+          <td><%= room.charges %></td>
+          <td><%= room.status %></td>
+          <td><%= link_to 'Show', room, class: "btn btn-info btn-lg" %></td>
+          <td><%= link_to 'Edit', edit_room_path(room), class: "btn btn-info btn-lg" %></td>
+          <td><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-info btn-lg" %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<% if admin_signed_in? %>
+  <%= link_to 'New Room', new_room_path, class: "btn btn-info btn-lg" %>
+<% end %>
+
+<script type="text/javascript">
+  $(document).ready( function () {
+      $('#room_table').DataTable({
+          "paging": true,
+          "scrollY": 400,
+          "ordering": true
+        });
+  } );
+</script>
+
